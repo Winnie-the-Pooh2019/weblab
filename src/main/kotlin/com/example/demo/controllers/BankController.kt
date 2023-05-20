@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import kotlin.reflect.full.memberProperties
+import java.lang.IllegalArgumentException
 
 @RestController
 @RequestMapping("/api/banks")
@@ -17,42 +17,26 @@ class BankController(
     private val service: BankService
 ) {
 
+    @ExceptionHandler(NoSuchElementException::class)
+    fun handleNoSuchElement(exception: NoSuchElementException) = ResponseEntity(exception.message, HttpStatus.NOT_FOUND)
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun handleIllegalArgument(exception: IllegalArgumentException) = ResponseEntity(exception.message, HttpStatus.BAD_REQUEST)
+
     @GetMapping
     fun getBanks() = service.getBanks()
 
     @GetMapping("{id}")
-    fun getById(@PathVariable id: String): ResponseEntity<Bank> {
-        val bank = service.getBanks().find { it.accountNumber == id }
-
-        return if (bank == null)
-            ResponseEntity(HttpStatus.NO_CONTENT)
-        else
-            ResponseEntity(bank, HttpStatus.OK)
-    }
+    fun getById(@PathVariable id: String) = service.getBank(id)
 
     @PostMapping
-    fun addBank(@RequestBody bank: Bank): ResponseEntity<Bank> {
-        if (service.getBanks().toMutableList().add(bank))
-            return ResponseEntity(bank, HttpStatus.CREATED)
-
-        return ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR)
-    }
+    @ResponseStatus(HttpStatus.CREATED)
+    fun addBank(@RequestBody bank: Bank) = service.addBank(bank)
 
     @PatchMapping
-    fun updateBank(@RequestBody bank: Bank): ResponseEntity<Bank> {
-        val oldBank = service.getBanks().find { it.accountNumber == bank.accountNumber }
-            ?: return ResponseEntity(HttpStatus.NO_CONTENT)
+    fun updateBank(@RequestBody bank: Bank) = service.updateBank(bank)
 
-        oldBank.transactionFee = bank.transactionFee
-        oldBank.trust = bank.trust
-
-        return ResponseEntity(oldBank, HttpStatus.OK)
-    }
-
-    @DeleteMapping
-    fun deleteById(@PathVariable id: String): ResponseEntity<Bank> =
-        if (service.getBanks().toMutableList().removeIf { it.accountNumber == id })
-            ResponseEntity(HttpStatus.OK)
-        else
-            ResponseEntity(HttpStatus.NO_CONTENT)
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteById(@PathVariable id: String) = service.deleteBank(accountNumber = id)
 }

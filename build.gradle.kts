@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
+    kotlin("plugin.serialization") version "1.7.22"
 }
 
 group = "com.example"
@@ -19,6 +20,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.mockk:mockk:1.10.4")
 }
