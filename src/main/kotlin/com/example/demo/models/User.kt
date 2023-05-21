@@ -8,17 +8,16 @@ import jakarta.persistence.Id
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 
 @Entity
-data class User(
+class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id: Int = 0,
+    var id: Int = 0
 
     @Column
-    var name: String = "",
+    var name: String = ""
 
     @Column
     var email: String = ""
-) {
 
     @Column
     var password: String = ""
