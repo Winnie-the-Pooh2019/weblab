@@ -1,19 +1,17 @@
 package com.example.demo.domain.model.weather
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.google.gson.annotations.SerializedName
 
-@Serializable
 data class Main(
     val temp: Double,
 
-    @SerialName("feels_like")
+    @SerializedName("feels_like")
     val feelsLike: Double,
 
-    @SerialName("temp_min")
+    @SerializedName("temp_min")
     val tempMin: Double,
 
-    @SerialName("temp_max")
+    @SerializedName("temp_max")
     val tempMax: Double,
 
     val pressure: Int,

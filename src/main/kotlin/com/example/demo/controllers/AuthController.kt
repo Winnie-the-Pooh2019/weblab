@@ -11,6 +11,7 @@ import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.Cookie
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.ResponseEntity
+import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -23,6 +24,11 @@ class AuthController(private val userService: UserService) {
     @PostMapping("register")
     fun register(@RequestBody userCredentials: RegisterDto): ResponseEntity<User> =
         ResponseEntity.ok(userService.save(userCredentials.toEntity()))
+
+    @GetMapping("login")
+    fun login(model: Model): String {
+
+    }
 
     @PostMapping("login")
     fun login(@RequestBody userCredentials: LoginDto, response: HttpServletResponse): ResponseEntity<Any> {

@@ -28,8 +28,8 @@ data class User(
             field = BCryptPasswordEncoder().encode(value)
         }
 
-    constructor(
-        id: Int,
+    public constructor(
+        id: Int = 0,
         name: String,
         email: String,
         password: String,

@@ -1,11 +1,9 @@
 package com.example.demo.services
 
-import com.example.demo.domain.model.City
-import com.example.demo.domain.model.ForecastWrapper
-import com.example.demo.domain.model.weather.WeatherWrapper
+import com.example.demo.domain.model.forecast.City
 
 interface IClientRequest {
-    fun forecast(city: City): ForecastWrapper
+    fun forecast(city: City)
 
-    fun weather(city: City): WeatherWrapper
+    fun weather(city: City)
 }

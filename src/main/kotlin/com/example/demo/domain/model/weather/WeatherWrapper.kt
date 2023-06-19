@@ -1,14 +1,13 @@
 package com.example.demo.domain.model.weather
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
 
-@Serializable
 data class WeatherWrapper(
     val weather: List<Weather>,
     val main: Main,
     val wind: Wind,
 
-    @SerialName("name")
+    @SerializedName("name")
     val cityName: String
 )
