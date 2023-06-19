@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:bootstrap="http://www.thymeleaf.org/extras/bootstrap">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <title>Thymeleaf Table</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-
+<h1 th:text="${city}"></h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Date</th>
+    <th>Temperature</th>
+    <th>Feels Like</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="forecast, itemStat : ${forecasts}">
+    <td th:text="${forecast.date}"></td>
+    <td th:text="${forecast.temperature}"></td>
+    <td th:text="${forecast.feelsLike}"></td>
+  </tr>
+  </tbody>
+</table>
 </body>
 </html>
