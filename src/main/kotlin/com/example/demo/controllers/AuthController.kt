@@ -18,20 +18,16 @@ import java.util.*
 @RestController
 @RequestMapping("/api")
 class AuthController(private val userService: UserService) {
-    @GetMapping("register")
-    fun hello() = "hello"
 
     @PostMapping("register")
-    fun register(@RequestBody userCredentials: RegisterDto): ResponseEntity<User> =
-        ResponseEntity.ok(userService.save(userCredentials.toEntity()))
+    fun register(userCredentials: RegisterDto): ResponseEntity<User> {
+        println("HELLO FROM REG")
 
-    @GetMapping("login")
-    fun login(model: Model): String {
-
+        return ResponseEntity.ok(userService.save(userCredentials.toEntity()))
     }
 
     @PostMapping("login")
-    fun login(@RequestBody userCredentials: LoginDto, response: HttpServletResponse): ResponseEntity<Any> {
+    fun login(userCredentials: LoginDto, response: HttpServletResponse): ResponseEntity<Any> {
         val user = userService.findByEmail(userCredentials.email)
             ?: return ResponseEntity.badRequest().body(Message("User not found"))
 

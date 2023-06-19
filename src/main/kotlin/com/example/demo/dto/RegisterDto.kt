@@ -12,7 +12,6 @@ data class RegisterDto(
         name = name,
         email = email,
         password = password,
-        city = city,
-
+        city = city
     )
 }
