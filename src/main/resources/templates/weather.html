@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:bootstrap="http://www.thymeleaf.org/extras/bootstrap">
+<head>
+  <title>Thymeleaf Table</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Temperature</th>
+    <th>Feels Like</th>
+    <th>Temp Min</th>
+    <th>Temp Max</th>
+    <th>Pressure</th>
+    <th>Humidity</th>
+    <th>Weather Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="weather, itemStat : ${weathers}">
+    <td th:text="${weather.temperature}"></td>
+    <td th:text="${weather.feelsLike}"></td>
+    <td th:text="${weather.tempMin}"></td>
+    <td th:text="${weather.tempMax}"></td>
+    <td th:text="${weather.pressure}"></td>
+    <td th:text="${weather.humidity}"></td>
+    <td th:text="${weather.weatherDescription}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
