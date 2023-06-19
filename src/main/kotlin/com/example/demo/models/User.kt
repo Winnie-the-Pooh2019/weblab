@@ -17,7 +17,10 @@ data class User(
     var name: String = "",
 
     @Column
-    var email: String = ""
+    var email: String = "",
+
+    @Column
+    var city: String = ""
 ) {
     @Column
     var password: String = ""
@@ -29,8 +32,9 @@ data class User(
         id: Int,
         name: String,
         email: String,
-        password: String
-    ) : this(id, name, email) {
+        password: String,
+        city: String
+    ) : this(id, name, email, city) {
         this.password = password
     }
 
